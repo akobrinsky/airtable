@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import styled from 'styled-components';
-import timelineItems from '../timelineItems';
-import Row from '../components/Row';
-import EventHeader from '../components/EventHeader';
-import ZoomButton from '../components/ZoomButton';
+import timelineItems from '../../timelineItems';
+import Row from '../Row';
+import EventHeader from '../EventHeader';
+import ZoomButton from '../ZoomButton';
 
 // grid columns based on endGrid
 const EventGrid = styled.div`
@@ -88,8 +88,9 @@ const Timeline = () => {
       [firstEvent.id]: firstEvent.name,
     };
     for (let i = 1; i < events.length; i += 1) {
-      eventInputs[events[i].id] = events[i].name;
-      const currentLast = moment(events[i].end);
+      const current = events[i];
+      eventInputs[current.id] = current.name;
+      const currentLast = moment(current.end);
       last = moment.max(last, currentLast);
     }
     const endGrid = last.diff(first, 'days');
